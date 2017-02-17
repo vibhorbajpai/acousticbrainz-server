@@ -4,8 +4,6 @@ library (Python bindings), which is a main part of the dataset evaluator.
 
 More info about Gaia is available at https://github.com/MTG/gaia.
 """
-import sys
-sys.path.append("/usr/local/lib/python2.7/dist-packages/")
 from gaia2.scripts.classification.generate_classification_project \
     import generateProject as generate_classification_project
 from gaia2.scripts.classification.run_tests import runTests as run_tests
