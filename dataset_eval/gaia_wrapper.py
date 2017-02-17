@@ -4,6 +4,8 @@ library (Python bindings), which is a main part of the dataset evaluator.
 
 More info about Gaia is available at https://github.com/MTG/gaia.
 """
+import sys
+sys.path.append("/usr/local/lib/python2.7/dist-packages/")
 from gaia2.scripts.classification.generate_classification_project \
     import generateProject as generate_classification_project
 from gaia2.scripts.classification.run_tests import runTests as run_tests
@@ -97,13 +99,13 @@ def train_svm_history(project, params, output_file_path):
     ds = DataSet()
     ds.load(os.path.join(
         project["datasetsDirectory"],
-        "%s-%s.db" % (project["className"], params_model.pop("preprocessing"))
+        "%s-%s.db" % (project["className"], params_model["preprocessing"])
     ))
 
     gt = GroundTruth.fromFile(project["groundtruth"])
     gt.className = "highlevel." + project["className"]
 
-    history = train_svm(ds, gt, **params_model)  # doing the whole training
+    history = train_svm(ds, gt, type = params_model["type"], kernel = params_model["kernel"], C = params_model["C"], gamma = params_model["gamma"])
     history.save(output_file_path)
 
 
